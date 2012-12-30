@@ -149,7 +149,7 @@ defaultproperties
 	
 	// Text
 	TextOffsetX=30.0
-	TextOffsetY=670.0
+	TextOffsetY=660.0
 	
 	// Mesh
 	Begin Object Name=LabelMesh

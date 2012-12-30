@@ -29,6 +29,7 @@ var (Label) const LinearColor 		TextClearColor;
 var (Label) const LinearColor		OnLight;
 var (Label) const LinearColor		OffLight;
 
+var (Label) const Font				TextFont;
 var (Label) MaterialInterface 		TextMaterialTemplate;
 var (Label) MaterialInstanceConstant TextMaterial;
 
@@ -153,6 +154,7 @@ function OnRender(Canvas C)
 	C.SetOrigin(TextOffsetX, TextOffsetY);
 	C.SetPos(0, 0);
 	C.SetDrawColorStruct(TextColor);
+	C.Font = TextFont;
 	C.DrawText(Text,, TextScale, TextScale);
 	CanvasTexture.bNeedsUpdate = true;
 }
@@ -234,10 +236,11 @@ defaultproperties
 	CollisionComponent=LabelMesh
 	
 	// Text
+	TextFont=Font'DV_UI.Font.Default'
 	TextMaterialTemplate=Material'DV_UI.Material.M_Label'
-	TextScale=4.5
+	TextScale=3.0
 	TextOffsetX=30.0
-	TextOffsetY=30.0
+	TextOffsetY=20.0
 	TextClearColor=(R=0.0,G=0.0,B=0.0,A=0.0)
 	TextColor=(R=255,G=255,B=255,A=255)
 	

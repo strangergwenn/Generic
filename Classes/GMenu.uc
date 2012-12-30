@@ -19,6 +19,7 @@ var (Menu) const int					Index;
 
 var (Menu) const float					MenuSwitchTime;
 
+var (Menu) const vector					LabelOffset;
 var (Menu) const vector					ViewOffset;
 
 var (Menu) const string					MenuName;
@@ -402,11 +403,24 @@ simulated function PostBeginPlay()
 	);
 	
 	// Helper label and custom UI
-	Label = Spawn(class'GLabel', self, , Location + (Vect(-300,0,430) >> Rotation));
+	Label = Spawn(class'GLabel', self, , Location + (LabelOffset >> Rotation));
 	Label.SetRotation(Rotation);
 	Label.Set(MenuName @"-" @MenuComment, "");
 	Items.AddItem(Label);
 	GetPC();
+}
+
+/**
+ * @brief Launch the UI fo this menu
+ */
+simulated function SpawnUI()
+{
+	local GMenu PreviousMenu, NextMenu;
+	PreviousMenu = GetRelatedMenu(true);
+	NextMenu = GetRelatedMenu(false);
+	
+	AddMenuLink(Vect(-300,0,0), PreviousMenu);
+	AddMenuLink(Vect(300,0,0), NextMenu);
 }
 
 /**
@@ -423,19 +437,6 @@ simulated function GetPC()
 	{
 		SpawnUI();
 	}
-}
-
-/**
- * @brief Launch the UI fo this menu
- */
-simulated function SpawnUI()
-{
-	local GMenu PreviousMenu, NextMenu;
-	PreviousMenu = GetRelatedMenu(true);
-	NextMenu = GetRelatedMenu(false);
-	
-	AddMenuLink(Vect(-300,0,0), PreviousMenu);
-	AddMenuLink(Vect(300,0,0), NextMenu);
 }
 
 /**
@@ -465,6 +466,7 @@ defaultproperties
 	TextFieldClass=class'GTextField'
 	ButtonClass=class'GButton'
 	LabelClass=class'GLabel'
+	LabelOffset=(X=-300,Y=0,Z=450)
 	ViewOffset=(X=0,Y=500,Z=250)
 	
 	// Mesh

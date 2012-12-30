@@ -120,10 +120,10 @@ function OnRender(Canvas C)
 {
 	local byte i;
 	local string DisplayText;
-	DisplayText = Text;
 	C.SetOrigin(TextOffsetX, TextOffsetY);
 	C.SetPos(0, 0);
 	C.SetDrawColorStruct(TextColor);
+	C.Font = TextFont;
 	
 	if (bIsPassword)
 	{
