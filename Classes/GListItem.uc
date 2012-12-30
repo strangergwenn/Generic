@@ -58,7 +58,7 @@ defaultproperties
 	End Object
 	
 	Effect=None
-	TextScale=1.8
+	TextScale=1.0
 	TextOffsetX=30.0
 	TextOffsetY=20.0
 	PictureTemplate=Material'DV_UI.Material.M_Picture'

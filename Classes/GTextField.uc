@@ -120,6 +120,7 @@ function OnRender(Canvas C)
 {
 	local byte i;
 	local string DisplayText;
+	DisplayText = Text;
 	C.SetOrigin(TextOffsetX, TextOffsetY);
 	C.SetPos(0, 0);
 	C.SetDrawColorStruct(TextColor);
@@ -152,7 +153,7 @@ defaultproperties
 	
 	bClearNext=false
 	Effect=None
-	TextScale=5.0
+	TextScale=3.0
 	TextOffsetX=30.0
 	TextOffsetY=25.0
 	TextMaterialTemplate=Material'DV_UI.Material.M_EmissiveLabel'
