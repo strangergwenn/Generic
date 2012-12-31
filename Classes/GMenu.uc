@@ -28,6 +28,7 @@ var (Menu) const string					MenuComment;
 var (Menu) const class<GTextField>		TextFieldClass;
 var (Menu) const class<GButton>			ButtonClass;
 var (Menu) const class<GLabel>			LabelClass;
+var (Menu) const class<GList>			ListClass;
 
 var (Menu) GViewPoint					ViewPoint;
 
@@ -76,26 +77,6 @@ simulated function SetOrigin(GMenu Org)
 	{
 		Origin = Org;
 	}
-}
-
-/**
- * @brief Check the string presence in an array
- * @param str					String to search
- * @param data					Array to search in
- * @param bInvert				Invert the searching mode
- * @return Index found or -1
- */
-simulated function int IsInArray(string str, array<string> data, optional bool bInvert)
-{
-	local byte i;
-	
-	for (i = 0; i < data.Length; i++)
-	{
-		if (   (!bInvert && InStr(str, data[i]) != -1)
-			|| (bInvert && InStr(data[i], str) != -1))
-			return i;
-	}
-	return -1;
 }
 
 
@@ -217,7 +198,7 @@ delegate GoBack(Actor Caller)
 
 
 /*----------------------------------------------------------
-	Private methods
+	Private methods : menu management
 ----------------------------------------------------------*/
 
 /**
@@ -308,6 +289,47 @@ simulated function GMenu GetMenuByName(string SearchName)
 }
 
 /**
+ * @brief Get a player
+ **/
+simulated function GetPC()
+{
+	PC = UDKPlayerController(GetALocalPlayerController());
+	if (PC == None)
+	{
+		SetTimer(0.5, false, 'GetPC');
+	}
+	else
+	{
+		SpawnUI();
+	}
+}
+
+/**
+ * @brief Check the string presence in an array
+ * @param str					String to search
+ * @param data					Array to search in
+ * @param bInvert				Invert the searching mode
+ * @return Index found or -1
+ */
+simulated function int IsInArray(string str, array<string> data, optional bool bInvert)
+{
+	local byte i;
+	
+	for (i = 0; i < data.Length; i++)
+	{
+		if (   (!bInvert && InStr(str, data[i]) != -1)
+			|| (bInvert && InStr(data[i], str) != -1))
+			return i;
+	}
+	return -1;
+}
+
+
+/*----------------------------------------------------------
+	Private methods : menu content
+----------------------------------------------------------*/
+
+/**
  * @brief Add a menu link on the menu
  * @param Pos				Offset from menu origin
  * @param Target			Target menu
@@ -335,14 +357,15 @@ simulated function GButton AddMenuLink(vector Pos, GMenu Target,
  * @param SpawnClass		Optional class to use
  * @return added item
  */
-simulated function GButton AddButton(vector Pos, string Text, string Comment, delegate<GButton.PressCB> CB,
+simulated function GButton AddButton(vector Pos, string Text, string Comment,
+	delegate<GButton.PressCB> CB,
 	optional class<GButton> SpawnClass=ButtonClass)
 {
 	local GButton Temp;
 	Temp = Spawn(SpawnClass, self, , Location + (Pos >> Rotation));
+	Temp.SetRotation(Rotation);
 	Temp.Set(Text, Comment);
 	Temp.SetPress(CB);
-	Temp.SetRotation(Rotation);
 	Items.AddItem(Temp);
 	return Temp;
 }
@@ -359,8 +382,8 @@ simulated function GLabel AddLabel(vector Pos, string Text,
 {
 	local GLabel Temp;
 	Temp = Spawn(SpawnClass, self, , Location + (Pos >> Rotation));
-	Temp.Set(Text, "");
 	Temp.SetRotation(Rotation);
+	Temp.Set(Text, "");
 	Items.AddItem(Temp);
 	return Temp;
 }
@@ -378,6 +401,25 @@ simulated function GTextField AddTextField(vector Pos,
 	Temp = Spawn(SpawnClass, self, , Location + (Pos >> Rotation));
 	Temp.SetRotation(Rotation);
 	Items.AddItem(Temp);
+	return Temp;
+}
+
+/**
+ * @brief Add a list on the menu
+ * @param Pos				Offset from menu origin
+ * @param Content			Text array
+ * @param Pics				Picture array
+ * @param SpawnClass		Optional class to use
+ * @return added item
+ */
+simulated function GList AddList(vector Pos, array<string> Content,
+	optional array<Texture2D> Pics,
+	optional class<GList> SpawnClass=ListClass)
+{
+	local GList Temp;
+	Temp = Spawn(SpawnClass, self, , Location + (Pos >> Rotation));
+	Temp.SetRotation(Rotation);
+	Temp.Set(Content, Pics);
 	return Temp;
 }
 
@@ -423,31 +465,6 @@ simulated function SpawnUI()
 	AddMenuLink(Vect(300,0,0), NextMenu);
 }
 
-/**
- * @brief Get a player
- **/
-simulated function GetPC()
-{
-	PC = UDKPlayerController(GetALocalPlayerController());
-	if (PC == None)
-	{
-		SetTimer(0.5, false, 'GetPC');
-	}
-	else
-	{
-		SpawnUI();
-	}
-}
-
-/**
- * @brief Tick event (thread)
- * @param DeltaTime			Time since last tick
- */
-simulated event Tick(float DeltaTime)
-{
-	super.Tick(DeltaTime);
-}
-
 
 /*----------------------------------------------------------
 	Properties
@@ -466,6 +483,7 @@ defaultproperties
 	TextFieldClass=class'GTextField'
 	ButtonClass=class'GButton'
 	LabelClass=class'GLabel'
+	ListClass=class'GList'
 	LabelOffset=(X=-300,Y=0,Z=450)
 	ViewOffset=(X=0,Y=500,Z=250)
 	

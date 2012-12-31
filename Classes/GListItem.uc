@@ -13,7 +13,10 @@ class GListItem extends GToggleButton
 	Public attributes
 ----------------------------------------------------------*/
 
+var (Button) int						Index;
+
 var (Button) string						Data;
+
 var (Button) MaterialInterface 			PictureTemplate;
 
 
@@ -23,10 +26,12 @@ var (Button) MaterialInterface 			PictureTemplate;
 
 /**
  * @brief Setup the button
+ * @param Idx					List index
  * @param Path					Level path
  */
-simulated function SetData(string Path)
+simulated function SetData(int Idx, string Path)
 {
+	Index = Idx;
 	Data = Path;
 }
 

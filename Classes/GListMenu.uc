@@ -12,7 +12,7 @@ class GListMenu extends GMenu;
 	Public attributes
 ----------------------------------------------------------*/
 
-var (Menu) const int					ListMinSize;
+var (Menu) const int					ListSize;
 
 var (Menu) const vector					ListOffset;
 var (Menu) const vector					ScrollOffset;
@@ -98,8 +98,8 @@ simulated function SetListItemsCollision(bool bState)
 simulated function Scroll(bool bIsGoingUp)
 {
 	local Actor Temp;
-	if (( bIsGoingUp && (ScrollCount < ListCount - ListMinSize))
-	 || (!bIsGoingUp && (ScrollCount > ListMinSize - ListCount)))
+	if (( bIsGoingUp && (ScrollCount < ListCount - ListSize))
+	 || (!bIsGoingUp && (ScrollCount > ListSize - ListCount)))
 	{
 		SetListItemsCollision(false);
 		foreach AllActors(ListItemClass, Temp)
@@ -142,7 +142,7 @@ simulated function SpawnUI()
 simulated event Tick(float DeltaTime)
 {
 	super.Tick(DeltaTime);
-	if (CurrentData == "")
+	if (CurrentData == "" && Launch != None)
 	{
 		Launch.Deactivate();
 	}
@@ -163,8 +163,13 @@ function EmptyList()
 	local byte i;
 	for (i = 0; i < Items.Length; i++)
 	{
-		if (Items[i].IsA(ListItemClass.Name))
-			Items[i].Destroy();
+		if (Items[i] != None)
+		{
+			if (Items[i].IsA(ListItemClass.Name))
+			{
+				Items[i].Destroy();
+			}
+		}
 	}
 	ListCount = 0;
 }
@@ -176,9 +181,9 @@ function EmptyList()
 
 defaultproperties
 {
+	ListSize=5
 	ListCount=0
 	ScrollCount=0
-	ListMinSize=5
 	
 	MenuName="List menu"
 	MenuComment="List some items"

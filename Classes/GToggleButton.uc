@@ -79,7 +79,10 @@ simulated function bool GetState()
  */
 simulated function OverIn()
 {
-	GMenu(Owner).SetLabel(Comment);
+	if (Owner.IsA('GMenu'))
+	{
+		GMenu(Owner).SetLabel(Comment);
+	}
 	PlayUISound(OverSound);
 }
 
