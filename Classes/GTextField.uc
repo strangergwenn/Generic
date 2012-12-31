@@ -151,7 +151,6 @@ defaultproperties
 	End Object
 	
 	bClearNext=false
-	Effect=None
 	TextScale=3.0
 	TextOffsetX=30.0
 	TextOffsetY=25.0

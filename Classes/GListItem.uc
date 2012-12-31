@@ -61,7 +61,6 @@ defaultproperties
 		Scale=2.5
 	End Object
 	
-	Effect=None
 	TextScale=1.0
 	TextOffsetX=30.0
 	TextOffsetY=20.0
