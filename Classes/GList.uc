@@ -5,9 +5,9 @@
  *  @author Gwennaël ARBONA
  **/
 
-class GList extends Actor
-	placeable;
+class GList extends Actor;
 
+//TODO : scroll and activation
 
 /*----------------------------------------------------------
 	Public attributes

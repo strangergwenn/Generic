@@ -5,8 +5,7 @@
  *  @author Gwennaël ARBONA
  **/
 
-class GToggleButton extends GButton
-	placeable;
+class GToggleButton extends GButton;
 
 
 /*----------------------------------------------------------
@@ -92,7 +91,10 @@ simulated function OverIn()
  */
 simulated function OverOut()
 {
-	GMenu(Owner).SetLabel("");
+	if (Owner.IsA('GMenu'))
+	{
+		GMenu(Owner).SetLabel("");
+	}
 }
 
 

@@ -129,8 +129,8 @@ simulated function Enter()
  */
 simulated function SpawnUI()
 {
-	AddButton(Vect(-300,0,0), BackText, BackComment, GoBack);
-	Launch = AddButton(Vect(300,0,0), LaunchText, BackComment, GoLaunch);
+	AddButton(Vect(-320,0,0), BackText, BackComment, GoBack);
+	Launch = AddButton(Vect(320,0,0), LaunchText, BackComment, GoLaunch);
 	Launch.Deactivate();
 	UpdateList();
 }

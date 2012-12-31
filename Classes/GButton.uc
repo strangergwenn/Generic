@@ -5,8 +5,7 @@
  *  @author Gwennaël ARBONA
  **/
 
-class GButton extends GLabel
-	placeable;
+class GButton extends GLabel;
 
 
 /*----------------------------------------------------------
@@ -146,14 +145,4 @@ defaultproperties
 	ClickTimeout=1.0
 	OverSound=SoundCue'DV_Sound.UI.A_Click'
 	ClickSound=SoundCue'DV_Sound.UI.A_Bip'
-	
-	// Text
-	TextOffsetX=30.0
-	TextOffsetY=660.0
-	
-	// Mesh
-	Begin Object Name=LabelMesh
-		StaticMesh=StaticMesh'DV_UI.Mesh.SM_Button'
-		Rotation=(Yaw=32768)
-	End Object
 }

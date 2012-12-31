@@ -5,8 +5,7 @@
  *  @author Gwennaël ARBONA
  **/
 
-class GListItem extends GToggleButton
-	placeable;
+class GListItem extends GToggleButton;
 
 
 /*----------------------------------------------------------

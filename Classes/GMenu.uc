@@ -29,6 +29,7 @@ var (Menu) const class<GTextField>		TextFieldClass;
 var (Menu) const class<GButton>			ButtonClass;
 var (Menu) const class<GLabel>			LabelClass;
 var (Menu) const class<GList>			ListClass;
+var (Menu) const class<GDropList>		DropListClass;
 
 var (Menu) GViewPoint					ViewPoint;
 
@@ -408,18 +409,42 @@ simulated function GTextField AddTextField(vector Pos,
  * @brief Add a list on the menu
  * @param Pos				Offset from menu origin
  * @param Content			Text array
- * @param Pics				Picture array
  * @param SpawnClass		Optional class to use
+ * @param Pics				Optional picture array
  * @return added item
  */
 simulated function GList AddList(vector Pos, array<string> Content,
-	optional array<Texture2D> Pics,
-	optional class<GList> SpawnClass=ListClass)
+	optional class<GList> SpawnClass=ListClass,
+	optional array<Texture2D> Pics)
 {
 	local GList Temp;
 	Temp = Spawn(SpawnClass, self, , Location + (Pos >> Rotation));
 	Temp.SetRotation(Rotation);
 	Temp.Set(Content, Pics);
+	return Temp;
+}
+
+/**
+ * @brief Add a drop list on the menu
+ * @param Pos				Offset from menu origin
+ * @param Title				Title
+ * @param Comment			Comment
+ * @param Content			Text array
+ * @param SpawnClass		Optional class to use
+ * @param Pics				Optional picture array
+ * @return added item
+ */
+simulated function GDropList AddDropList(vector Pos, string Title, string Comment,
+	array<string> Content,
+	optional class<GDropList> SpawnClass=DropListClass,
+	optional array<Texture2D> Pics)
+{
+	local GDropList Temp;
+	Temp = Spawn(SpawnClass, self, , Location + (Pos >> Rotation));
+	Temp.SetRotation(Rotation);
+	Temp.SetTitle(Title, Comment);
+	Temp.Set(Content, Pics);
+	Items.AddItem(Temp.TitleButton);
 	return Temp;
 }
 
@@ -461,8 +486,8 @@ simulated function SpawnUI()
 	PreviousMenu = GetRelatedMenu(true);
 	NextMenu = GetRelatedMenu(false);
 	
-	AddMenuLink(Vect(-300,0,0), PreviousMenu);
-	AddMenuLink(Vect(300,0,0), NextMenu);
+	AddMenuLink(Vect(-320,0,0), PreviousMenu);
+	AddMenuLink(Vect(320,0,0), NextMenu);
 }
 
 
@@ -484,7 +509,8 @@ defaultproperties
 	ButtonClass=class'GButton'
 	LabelClass=class'GLabel'
 	ListClass=class'GList'
-	LabelOffset=(X=-300,Y=0,Z=450)
+	DropListClass=class'GDropList'
+	LabelOffset=(X=-320,Y=0,Z=470)
 	ViewOffset=(X=0,Y=500,Z=250)
 	
 	// Mesh

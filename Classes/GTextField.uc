@@ -5,8 +5,7 @@
  *  @author Gwennaël ARBONA
  **/
 
-class GTextField extends GToggleButton
-	placeable;
+class GTextField extends GToggleButton;
 
 
 /*----------------------------------------------------------

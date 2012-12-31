@@ -5,8 +5,7 @@
  *  @author Gwennaël ARBONA
  **/
 
-class GLabel extends Actor
-	placeable;
+class GLabel extends Actor;
 
 
 /*----------------------------------------------------------
@@ -228,8 +227,9 @@ defaultproperties
 	// Mesh
 	Begin Object Class=StaticMeshComponent Name=LabelMesh
 		LightEnvironment=MyLightEnvironment
-		StaticMesh=StaticMesh'DV_UI.Mesh.SM_Label'
+		StaticMesh=StaticMesh'DV_UI.Mesh.SM_SimpleLabel'
 		Rotation=(Yaw=32768)
+		Scale=0.8
 	End Object
 	Mesh=LabelMesh
 	Components.Add(LabelMesh)
@@ -237,10 +237,10 @@ defaultproperties
 	
 	// Text
 	TextFont=Font'DV_UI.Font.Default'
-	TextMaterialTemplate=Material'DV_UI.Material.M_Label'
+	TextMaterialTemplate=Material'DV_UI.Material.M_EmissiveLabel'
 	TextScale=3.0
-	TextOffsetX=30.0
-	TextOffsetY=20.0
+	TextOffsetX=40.0
+	TextOffsetY=30.0
 	TextClearColor=(R=0.0,G=0.0,B=0.0,A=0.0)
 	TextColor=(R=255,G=255,B=255,A=255)
 	
