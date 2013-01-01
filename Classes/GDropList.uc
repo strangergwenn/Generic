@@ -15,6 +15,8 @@ class GDropList extends GList
 
 var (List) bool							bDropped;
 
+var (List) const int 					ShortTitleLength;
+
 var (List) const class<GToggleButton>	ButtonClass;
 var (List) GToggleButton				TitleButton;
 
@@ -37,12 +39,8 @@ var string								Title;
  */
 simulated function SetTitle(string T, string Comment)
 {
-	local GToggleButton Temp;
-	Temp = Spawn(ButtonClass, self, , Location);
-	Temp.SetRotation(Rotation);
-	Temp.Set(T, Comment);
-	Temp.SetPress(GoToggle);
 	Title = T;
+	TitleButton.Set(Title, Comment);
 }
 
 /**
@@ -65,7 +63,15 @@ simulated function Set(array<string> Content,
  */
 simulated function DropList()
 {
+	local byte i;
+	super.PostBeginPlay();
+	
 	bDropped = true;
+	for (i = 0; i < Items.Length; i++)
+	{
+		Items[i].SetVisible(bDropped);
+	}
+	TitleButton.Set(Title, "");
 }
 
 /**
@@ -73,13 +79,35 @@ simulated function DropList()
  */
 simulated function RetractList()
 {
+	local byte i;
+	super.PostBeginPlay();
+	
 	bDropped = false;
+	for (i = 0; i < Items.Length; i++)
+	{
+		Items[i].SetVisible(bDropped);
+	}
+	TitleButton.SetState(false);
 }
 
 
 /*----------------------------------------------------------
 	Button callbacks
 ----------------------------------------------------------*/
+
+/**
+ * @brief List item callback
+ * @param Caller				Reference actor
+ */
+delegate ListCallback(Actor Caller)
+{
+	local GListItem Temp;
+	Temp = GListItem(Caller);
+	CurrentSelectedItem = (Temp.GetState() ? Temp : None);
+	TitleButton.Set(Left(Title, ShortTitleLength) @"-" @Temp.Data, "");
+	PressEvent(self);
+	RetractList();
+}
 
 /**
  * @brief Toggle the list
@@ -103,7 +131,13 @@ delegate GoToggle(Actor Caller)
  */
 simulated function PostBeginPlay()
 {
+	local GToggleButton Temp;
 	super.PostBeginPlay();
+	Temp = Spawn(ButtonClass, self, , Location);
+	Temp.SetRotation(Rotation);
+	Temp.Set(""$self, "");
+	Temp.SetPress(GoToggle);
+	TitleButton = Temp;
 }
 
 
@@ -114,5 +148,6 @@ simulated function PostBeginPlay()
 defaultproperties
 {
 	bDropped=false
+	ShortTitleLength=3
 	ButtonClass=class'GToggleButton'
 }

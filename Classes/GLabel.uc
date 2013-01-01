@@ -78,6 +78,23 @@ simulated function Set(string T, string C)
 }
 
 /**
+ * @brief Set the visibility
+ * @param bState				New visibility status
+ */
+simulated function SetVisible(bool bState)
+{
+	if (bState)
+	{
+		Activate();
+	}
+	else
+	{
+		Deactivate();
+	}
+	Mesh.SetHidden(!bState);
+}
+
+/**
  * @brief Enable the label
  */
 simulated function Activate()

@@ -90,6 +90,15 @@ simulated function string GetSelectedContent()
 	return CurrentSelectedItem.Text;
 }
 
+/**
+ * @brief Get the current ID
+ * @return The ID for the selected item
+ */
+simulated function string GetSelectedID()
+{
+	return CurrentSelectedItem.Index;
+}
+
 
 /*----------------------------------------------------------
 	Button callbacks
