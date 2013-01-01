@@ -184,21 +184,6 @@ function Debug(string Data)
 }
 
 /**
- * @brief Add a character
- * @param Unicode				Character typed
- */
-function CharPressed(string Unicode)
-{
-	if (FocusActor != None && !bSwitching)
-	{
-		if (FocusActor.IsA('GTextField'))
-		{
-			GTextField(FocusActor).KeyPressed(Unicode);
-		}
-	}
-}
-
-/**
  * @brief Force the focus on an item
  * @param Focus					Item forced to focus on
  */
@@ -214,6 +199,21 @@ function ForceFocus(GButton Focus)
 }
 
 /**
+ * @brief Add a character
+ * @param Unicode				Character typed
+ */
+function CharPressed(string Unicode)
+{
+	if (FocusActor != None && !bSwitching)
+	{
+		if (FocusActor.IsA('GTextField'))
+		{
+			GTextField(FocusActor).KeyPressed(Unicode);
+		}
+	}
+}
+
+/**
  * @brief Register the last key
  * @param Key					Key used
  * @param Evt					Event type
@@ -224,6 +224,13 @@ function KeyPressed(name Key, EInputEvent Evt)
 	if (bSwitching)
 	{
 		return;
+	}
+	
+	// General event propagation
+	if (CurrentMenu != None)
+	{
+		if (CurrentMenu.KeyPressed(Key, Evt))
+			return;
 	}
 
 	// Mouse events

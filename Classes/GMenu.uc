@@ -162,6 +162,17 @@ simulated function Enter()
 ----------------------------------------------------------*/
 
 /**
+ * @brief Key press event
+ * @param Key					Key used
+ * @param Evt					Event type
+ * @return true if event is consummed, false to keep it propagating
+ */
+function bool KeyPressed(name Key, EInputEvent Evt)
+{
+	return false;
+}
+
+/**
  * @brief Exit the game
  * @param Caller			Caller actor
  */

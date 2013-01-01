@@ -76,7 +76,6 @@ simulated function Set(array<string> Content,
 		}
 		Temp.SetPress(ListCallback);
 		Items.AddItem(Temp);
-		`log("ADD" @Temp @Temp.Location @Location @Content[i]);
 	}
 	ListCount = i;
 }
@@ -94,7 +93,7 @@ simulated function string GetSelectedContent()
  * @brief Get the current ID
  * @return The ID for the selected item
  */
-simulated function string GetSelectedID()
+simulated function int GetSelectedID()
 {
 	return CurrentSelectedItem.Index;
 }

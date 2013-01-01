@@ -103,10 +103,13 @@ delegate ListCallback(Actor Caller)
 {
 	local GListItem Temp;
 	Temp = GListItem(Caller);
+	`log("GDL > Press item" @Temp);
+	
 	CurrentSelectedItem = (Temp.GetState() ? Temp : None);
 	TitleButton.Set(Left(Title, ShortTitleLength) @"-" @Temp.Data, "");
 	PressEvent(self);
 	RetractList();
+	`log("GDL > Pressed item" @CurrentSelectedItem);
 }
 
 /**
