@@ -84,10 +84,13 @@ delegate GoSelect(Actor Caller)
  */
 simulated function SetListItemsCollision(bool bState)
 {
-	local Actor Temp;
-	foreach AllActors(ListItemClass, Temp)
+	local byte i;
+	for (i = 0; i < Items.Length; i++)
 	{
-		Temp.SetCollisionType((bState? COLLIDE_BlockAll : COLLIDE_NoCollision));
+		if (Items[i].IsA(ListItemClass.Name))
+		{
+			Items[i].SetCollisionType((bState? COLLIDE_BlockAll : COLLIDE_NoCollision));
+		}
 	}
 }
 
@@ -97,14 +100,17 @@ simulated function SetListItemsCollision(bool bState)
  */
 simulated function Scroll(bool bIsGoingUp)
 {
-	local Actor Temp;
+	local byte i;
 	if (( bIsGoingUp && (ScrollCount < ListCount - ListSize))
 	 || (!bIsGoingUp && (ScrollCount > ListSize - ListCount)))
 	{
 		SetListItemsCollision(false);
-		foreach AllActors(ListItemClass, Temp)
+		for (i = 0; i < Items.Length; i++)
 		{
-			Temp.MoveSmooth((bIsGoingUp? -ScrollOffset : ScrollOffset) >> Rotation);
+			if (Items[i].IsA(ListItemClass.Name))
+			{
+				Items[i].MoveSmooth((bIsGoingUp? -ScrollOffset : ScrollOffset) >> Rotation);
+			}
 		}
 		SetListItemsCollision(true);
 		ScrollCount += (bIsGoingUp ? 1 : -1);
