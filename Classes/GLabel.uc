@@ -62,19 +62,6 @@ simulated function Set(string T, string C)
 	Text = T;
 	Comment = C;
 	bEnabled = true;
-	
-	CanvasTexture = ScriptedTexture(class'ScriptedTexture'.static.Create(1024,1024,,TextClearColor));
-	CanvasTexture.Render = OnRender;
-	if (TextMaterialTemplate != None)
-	{
-		TextMaterial = Mesh.CreateAndSetMaterialInstanceConstant(0);
-		if (TextMaterial != None)
-		{
-			TextMaterial.SetParent(TextMaterialTemplate);
-			TextMaterial.SetTextureParameterValue('CanvasTexture', CanvasTexture);
-			TextMaterial.SetVectorParameterValue('Color', OnLight);
-		}
-	}
 }
 
 /**
@@ -160,6 +147,19 @@ simulated function PostBeginPlay()
 {
 	super.PostBeginPlay();
 	Set(""$self, "I am a label");
+	
+	if (TextMaterialTemplate != None)
+	{
+		CanvasTexture = ScriptedTexture(class'ScriptedTexture'.static.Create(1024,1024,,TextClearColor));
+		CanvasTexture.Render = OnRender;
+		TextMaterial = Mesh.CreateAndSetMaterialInstanceConstant(0);
+		if (TextMaterial != None)
+		{
+			TextMaterial.SetParent(TextMaterialTemplate);
+			TextMaterial.SetTextureParameterValue('CanvasTexture', CanvasTexture);
+			TextMaterial.SetVectorParameterValue('Color', OnLight);
+		}
+	}
 }
 
 /**

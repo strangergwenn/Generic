@@ -38,7 +38,6 @@ var bool							bIsActive;
 simulated function Set(string T, string C)
 {
 	super.Set(T, C);
-	TextMaterial.SetVectorParameterValue('Color', (bIsActive ? OnLight : OffLight));
 }
 
 /**
@@ -135,6 +134,7 @@ simulated function PostBeginPlay()
 {
 	super.PostBeginPlay();
 	SetPress(PressCB);
+	TextMaterial.SetVectorParameterValue('Color', (bIsActive ? OnLight : OffLight));
 }
 
 
