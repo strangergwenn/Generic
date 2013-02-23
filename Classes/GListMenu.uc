@@ -17,10 +17,6 @@ var (Menu) const int					ListSize;
 var (Menu) const vector					ListOffset;
 var (Menu) const vector					ScrollOffset;
 
-var (Menu) const string					BackText;
-var (Menu) const string					BackComment;
-var (Menu) const string					LaunchText;
-var (Menu) const string					LaunchComment;
 var (Menu) const array<string>			IgnoreList;
 
 var (Menu) const class<GListItem>		ListItemClass;
@@ -135,8 +131,8 @@ simulated function Enter()
  */
 simulated function SpawnUI()
 {
-	AddButton(Vect(-320,0,0), BackText, BackComment, GoBack);
-	Launch = AddButton(Vect(320,0,0), LaunchText, BackComment, GoLaunch);
+	AddButton(Vect(-320,0,0), lMBackText, lMBackComment, GoBack);
+	Launch = AddButton(Vect(320,0,0), lMLaunchText, lMBackComment, GoLaunch);
 	Launch.Deactivate();
 	UpdateList();
 }
@@ -190,13 +186,6 @@ defaultproperties
 	ListSize=5
 	ListCount=0
 	ScrollCount=0
-	
-	MenuName="List menu"
-	MenuComment="List some items"
-	BackText="Back"
-	BackComment="Previous menu"
-	LaunchText="Launch"
-	LaunchComment=""
 
 	ListItemClass=class'GListItem'
 	ListOffset=(X=0,Y=-50,Z=100)

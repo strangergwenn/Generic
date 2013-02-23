@@ -71,6 +71,12 @@ var () localized string			lFullScreen;
 var () localized string			lWaitingForKey;
 var () localized string			lJoinGame;
 var () localized string			lSaveSettings;
+var () localized string			lMBackText;
+var () localized string			lMBackComment;
+var () localized string			lMLaunchText;
+var () localized string			lMLaunchComment;
+var () localized string			lMSpectateText;
+var () localized string			lMSpectateComment;
 
 var () localized array<string>	MenuListData;
 var () localized array<string>	ResListData;
