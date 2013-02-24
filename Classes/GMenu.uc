@@ -22,8 +22,8 @@ var (Menu) const float					MenuSwitchTime;
 var (Menu) const vector					LabelOffset;
 var (Menu) const vector					ViewOffset;
 
-var (Menu) const string					MenuName;
-var (Menu) const string					MenuComment;
+var (Menu) localized string				lGMenuName;
+var (Menu) localized string				lGMenuComment;
 
 var (Menu) const class<GTextField>		TextFieldClass;
 var (Menu) const class<GButton>			ButtonClass;
@@ -64,7 +64,7 @@ simulated function SetLabel(string Text)
 	}
 	else if (Label != None)
 	{
-		Label.Set(MenuName @"-" @MenuComment, "");
+		Label.Set(lGMenuName @"-" @lGMenuComment, "");
 	}
 }
 
@@ -292,7 +292,7 @@ simulated function GMenu GetMenuByName(string SearchName)
 	local GMenu Temp;
 	foreach AllActors(class'GMenu', Temp)
 	{
-		if (Temp.MenuName == SearchName)
+		if (Temp.lGMenuName == SearchName)
 		{
 			return Temp;
 		}
@@ -354,7 +354,7 @@ simulated function GButton AddMenuLink(vector Pos, GMenu Target,
 	local GButton Temp;
 	if (Target != None)
 	{
-		Temp = AddButton(Pos, Target.MenuName, Target.MenuComment, GoChangeMenu, SpawnClass);
+		Temp = AddButton(Pos, Target.lGMenuName, Target.lGMenuComment, GoChangeMenu, SpawnClass);
 		Temp.SetTarget(Target);
 	}
 	return Temp;
@@ -483,7 +483,7 @@ simulated function PostBeginPlay()
 	// Helper label and custom UI
 	Label = Spawn(class'GLabel', self, , Location + (LabelOffset >> Rotation));
 	Label.SetRotation(Rotation);
-	Label.Set(MenuName @"-" @MenuComment, "");
+	Label.Set(lGMenuName @"-" @lGMenuComment, "");
 	Items.AddItem(Label);
 	GetPC();
 }
@@ -510,8 +510,6 @@ defaultproperties
 {
 	// Menu data
 	Index=9000
-	MenuName="Menu"
-	MenuComment="Change menu"
 	
 	// Behaviour
 	MenuSwitchTime=0.7

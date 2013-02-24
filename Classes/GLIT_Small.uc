@@ -34,7 +34,7 @@ defaultproperties
 	TextScale=3.0
 	TextOffsetX=40.0
 	TextOffsetY=30.0
-	OnLight=(R=1.5,G=0.3,B=0.0,A=1.0)
-	OffLight=(R=1.5,G=0.3,B=0.0,A=1.0)
+	OnLight=(R=0.0,G=0.5,B=3.0,A=1.0)
+	OffLight=(R=0.0,G=0.5,B=3.0,A=1.0)
 	TextMaterialTemplate=Material'DV_UI.Material.M_EmissiveLabel'
 }

@@ -264,7 +264,7 @@ defaultproperties
 	// Behaviour
 	bOver=false
 	bTickEnabled=true
-	OnLight=(R=5.0,G=0.3,B=0.0,A=1.0)
+	OnLight=(R=0.0,G=0.5,B=3.0,A=1.0)
 	OffLight=(R=0.1,G=0.1,B=0.1,A=1.0)
 	
 	// Physics
