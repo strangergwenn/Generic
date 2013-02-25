@@ -143,6 +143,5 @@ defaultproperties
 	ClickMove=(X=0,Y=2,Z=0)
 	bClicking=false
 	ClickTimeout=1.0
-	OverSound=SoundCue'DV_Sound.UI.A_Click'
 	ClickSound=SoundCue'DV_Sound.UI.A_Bip'
 }

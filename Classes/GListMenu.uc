@@ -158,7 +158,7 @@ function UpdateList()
 }
 
 /**
- * @brief Create a data list
+ * @brief Delete a data list
  */
 function EmptyList()
 {

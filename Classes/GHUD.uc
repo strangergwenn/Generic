@@ -54,7 +54,7 @@ simulated function PostBeginPlay()
 
 	foreach AllActors(class'GMenu', Temp)
 	{
-		if (Temp.Index == 0)
+		if (Temp.Index == 9999)
 		{
 			Temp.ChangeMenu(Temp);
 			SetCurrentMenu(Temp, Temp.MenuSwitchTime);
