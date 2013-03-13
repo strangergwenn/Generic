@@ -7,7 +7,6 @@
 
 class GList extends Actor;
 
-//TODO : scroll and activation
 
 /*----------------------------------------------------------
 	Public attributes
