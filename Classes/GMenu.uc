@@ -497,8 +497,8 @@ simulated function SpawnUI()
 	PreviousMenu = GetRelatedMenu(true);
 	NextMenu = GetRelatedMenu(false);
 	
-	AddMenuLink(Vect(-320,0,0), PreviousMenu);
-	AddMenuLink(Vect(320,0,0), NextMenu);
+	AddMenuLink(Vect(-300,0,50), PreviousMenu);
+	AddMenuLink(Vect(300,0,50), NextMenu);
 }
 
 
