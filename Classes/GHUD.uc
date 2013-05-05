@@ -25,6 +25,7 @@ var (HUD) const Texture2D 			CursorTexture;
 ----------------------------------------------------------*/
 
 var bool							bCaps;
+var bool							bCtrl;
 var bool							bSwitching;
 
 var string							DebugText;
@@ -206,7 +207,7 @@ function CharPressed(string Unicode)
 {
 	if (FocusActor != None && !bSwitching)
 	{
-		if (FocusActor.IsA('GTextField'))
+		if (FocusActor.IsA('GTextField') && !bCtrl)
 		{
 			GTextField(FocusActor).KeyPressed(Unicode);
 		}
@@ -259,11 +260,17 @@ function KeyPressed(name Key, EInputEvent Evt)
 	}
 	
 	// Caps
-	else if (Key == 'LeftShift' || Key == 'LeftShift')
+	else if (Key == 'LeftShift' || Key == 'RightShift')
 	{
 		bCaps = (Evt != IE_Released);
 	}
 	
+	// Control
+	else if (Key == 'LeftControl' || Key == 'RightControl')
+	{
+		bCtrl = (Evt != IE_Released);
+	}
+
 	// Menu interaction
 	else if (CurrentMenu != None && (Evt == IE_Pressed || Evt == IE_Repeat))
 	{

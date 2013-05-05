@@ -20,6 +20,16 @@ var IntPoint						MousePosition;
 	Public methods
 ----------------------------------------------------------*/
 
+/**
+ * @brief Init
+ */
+function InitInputSystem()
+{
+	super.InitInputSystem();
+	SetSensitivity(MouseSensitivity);
+}
+
+
 /** @brief Mouse input */
 event PlayerInput(float DeltaTime)
 {
@@ -29,6 +39,23 @@ event PlayerInput(float DeltaTime)
 		MousePosition.Y = Clamp(MousePosition.Y - aMouseY, 0, myHUD.SizeY);
 	}		
 	super.PlayerInput(DeltaTime);
+}
+
+
+/** @brief Set sensitivity */
+function SetMouseSensitivity(float NewValue)
+{
+	MouseSensitivity = NewValue;
+	SetSensitivity(MouseSensitivity);
+	SaveConfig();
+}
+
+
+/** @brief Set inversion */
+function SetMouseInvert(bool status)
+{
+	bInvertMouse = status;
+	SaveConfig();
 }
 
 /**
