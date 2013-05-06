@@ -271,6 +271,12 @@ function KeyPressed(name Key, EInputEvent Evt)
 		bCtrl = (Evt != IE_Released);
 	}
 
+	// Control override
+	if (Key == 'RightAlt')
+	{
+		bCtrl = false;
+	}
+
 	// Menu interaction
 	else if (CurrentMenu != None && (Evt == IE_Pressed || Evt == IE_Repeat))
 	{
