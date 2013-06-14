@@ -64,6 +64,7 @@ defaultproperties
 	TextScale=1.0
 	TextOffsetX=30.0
 	TextOffsetY=20.0
+	ClickMove=(X=0,Y=-10,Z=0)
 	PictureTemplate=Material'DV_UI.Material.M_Picture'
 	TextMaterialTemplate=Material'DV_UI.Material.M_EmissiveLabel'
 }

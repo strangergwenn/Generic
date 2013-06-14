@@ -64,7 +64,7 @@ simulated function SetLabel(string Text)
 	}
 	else if (Label != None)
 	{
-		Label.Set(lGMenuName @"-" @lGMenuComment, "");
+		Label.Set(lGMenuComment, "");
 	}
 }
 
@@ -483,7 +483,7 @@ simulated function PostBeginPlay()
 	// Helper label and custom UI
 	Label = Spawn(class'GLabel', self, , Location + (LabelOffset >> Rotation));
 	Label.SetRotation(Rotation);
-	Label.Set(lGMenuName @"-" @lGMenuComment, "");
+	Label.Set(lGMenuComment, "");
 	Items.AddItem(Label);
 	GetPC();
 }

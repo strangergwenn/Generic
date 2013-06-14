@@ -257,7 +257,7 @@ defaultproperties
 	TextMaterialTemplate=Material'DV_UI.Material.M_EmissiveLabel'
 	TextScale=3.0
 	TextOffsetX=40.0
-	TextOffsetY=30.0
+	TextOffsetY=25.0
 	TextClearColor=(R=0.0,G=0.0,B=0.0,A=0.0)
 	TextColor=(R=255,G=255,B=255,A=255)
 	
