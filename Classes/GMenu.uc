@@ -17,6 +17,10 @@ class GMenu extends GLocalizedObject
 
 var (Menu) const int					Index;
 
+var (Menu) const bool					bNoOrigin;
+var (Menu) const bool					bSpawnLabel;
+var (Menu) const bool					bNoEscapeBack;
+
 var (Menu) const float					MenuSwitchTime;
 
 var (Menu) const vector					LabelOffset;
@@ -67,6 +71,7 @@ simulated function SetLabel(string Text)
 		Label.Set(lGMenuComment, "");
 	}
 }
+
 
 /**
  * @brief Set the previous menu data
@@ -201,7 +206,7 @@ delegate GoChangeMenu(Actor Caller)
  */
 delegate GoBack(Actor Caller)
 {
-	`log("GM > GoBack" @self);
+	`log("GM > GoBack" @self @Origin);
 	if (Origin != None)
 	{
 		ChangeMenu(Origin);
@@ -228,7 +233,10 @@ simulated function ChangeMenu(GMenu NewMenu)
 	}
 	if (PC != None)
 	{
-		NewMenu.SetOrigin(self);
+		if (!bNoOrigin)
+		{
+			NewMenu.SetOrigin(self);
+		}
 		TransitionParams.BlendTime = MenuSwitchTime;
 		TransitionParams.BlendFunction = VTBlend_EaseInOut;
 		TransitionParams.BlendExp = 2.0;
@@ -481,9 +489,12 @@ simulated function PostBeginPlay()
 	);
 	
 	// Helper label and custom UI
-	Label = Spawn(class'GLabel', self, , Location + (LabelOffset >> Rotation));
-	Label.SetRotation(Rotation);
-	Label.Set(lGMenuComment, "");
+	if (bSpawnLabel)
+	{
+		Label = Spawn(class'GLabel', self, , Location + (LabelOffset >> Rotation));
+		Label.SetRotation(Rotation);
+		Label.Set(lGMenuComment, "");
+	}
 	Items.AddItem(Label);
 	GetPC();
 }
@@ -497,8 +508,8 @@ simulated function SpawnUI()
 	PreviousMenu = GetRelatedMenu(true);
 	NextMenu = GetRelatedMenu(false);
 	
-	AddMenuLink(Vect(-300,0,50), PreviousMenu);
-	AddMenuLink(Vect(300,0,50), NextMenu);
+	AddMenuLink(Vect(-320,0,470), PreviousMenu);
+	AddMenuLink(Vect(320,0,470), NextMenu);
 }
 
 
@@ -510,6 +521,7 @@ defaultproperties
 {
 	// Menu data
 	Index=9000
+	bNoOrigin=false
 	
 	// Behaviour
 	MenuSwitchTime=0.7

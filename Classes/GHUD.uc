@@ -291,7 +291,10 @@ function KeyPressed(name Key, EInputEvent Evt)
 				CurrentMenu.Enter();
 				break;
 			case 'Escape':
-				CurrentMenu.GoBack(None);
+				if (!CurrentMenu.bNoEscapeBack)
+				{
+					CurrentMenu.GoBack(None);
+				}
 				break;
 			case 'MouseScrollUp':
 				CurrentMenu.Scroll(true);
