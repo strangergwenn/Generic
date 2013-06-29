@@ -12,6 +12,8 @@ class GHUD extends UDKHUD;
 	Public attributes
 ----------------------------------------------------------*/
 
+var (HUD) const int					TracePeriodDivisor;
+
 var (HUD) const float				TraceOffset;
 
 var (HUD) const bool				bUseCursor;
@@ -27,6 +29,8 @@ var (HUD) const Texture2D 			CursorTexture;
 var bool							bCaps;
 var bool							bCtrl;
 var bool							bSwitching;
+
+var float							TraceCurrentCount;
 
 var string							DebugText;
 
@@ -122,7 +126,7 @@ function GetMouseWorldLocation()
 				MousePosition.Y = SizeY / 2;
 			}
 			
-			if (MousePosition != OldMousePosition)
+			if (MousePosition != OldMousePosition && TraceCurrentCount == 0)
 			{
 				Canvas.DeProject(MousePosition, MouseWorldOrigin, MouseWorldDirection);
 				Target = Trace(
@@ -134,6 +138,7 @@ function GetMouseWorldLocation()
 				);
 				OldMousePosition = MousePosition;
 			}
+			TraceCurrentCount = (TraceCurrentCount + 1) % TracePeriodDivisor;
 		}
 	}
 }
@@ -326,6 +331,7 @@ defaultproperties
 	bCaps=false
 	bUseCursor=true
 	TraceOffset=64.0
+	TracePeriodDivisor=5
 	CursorColor=(R=255,G=255,B=255,A=255)
 	CursorTexture=Texture2D'EngineResources.Cursors.Arrow'
 }
